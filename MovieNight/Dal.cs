@@ -17,7 +17,7 @@ namespace MovieNight
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM Movie WHERE title LIKE @search", connection);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM Movie WHERE Title LIKE @search", connection);
                 SqlParameter parameter = new SqlParameter();
                 parameter.ParameterName = "@search";
                 parameter.Value = "%" + search + "%";
@@ -25,12 +25,13 @@ namespace MovieNight
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    int id = (int)reader["ID"];
+                    int id = (int)reader["MovieID"];
                     string title = (string)reader["Title"];
+                    DateTime releaseDate = (DateTime)reader["Release_date"];
+                    string genre = (string)reader["Genre"];
                     string description = (string)reader["Description"];
-                    int releaseYear = (int)reader["Year"];
 
-                    Movie movie = new Movie(id, title, releaseDate, description);
+                    Movie movie = new Movie(id, title, releaseDate, genre, description);
 
                     movies.Add(movie);
                 }

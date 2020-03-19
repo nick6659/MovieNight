@@ -66,17 +66,17 @@ namespace MovieNight
                 Console.WriteLine("Film titel: " + item.Title + "\nUdgivelsesår: " + item.ReleaseDate + "\nBeskrivelse: '" + item.Description + "'\n\n");
             }
 
-            Console.WriteLine("Press any key to continue...");
+            Console.WriteLine("Tryk på ENTER for at fortsætte..");
             Console.ReadKey();
             Console.Clear();
         }
         public static void SearchActor()
         {
-            Console.Write("Actor search: ");
+            Console.Write("Søg efter skuespiller: ");
             string searchAct = Console.ReadLine();
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\nList of actors");
+            Console.WriteLine("\nSkuespillere");
             Console.ResetColor();
             List<Actor> actor = ActorLibrary.ActorList(searchAct);
             foreach (Actor item in actor)
@@ -84,7 +84,7 @@ namespace MovieNight
                 Console.WriteLine(item.FirstName + " " + item.LastName + "\n");
             }
 
-            Console.WriteLine("Press any key to continue...");
+            Console.WriteLine("Tryk på ENTER for at fortsætte..");
             Console.ReadKey();
             Console.Clear();
         }
@@ -100,7 +100,7 @@ namespace MovieNight
                 Console.WriteLine("\n" + item.Title);
             }
 
-            Console.WriteLine("\n\nPress any key to continue...");
+            Console.WriteLine("Tryk på ENTER for at fortsætte..");
             Console.ReadKey();
             Console.Clear();
         }

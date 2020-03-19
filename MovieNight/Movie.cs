@@ -8,7 +8,7 @@ namespace MovieNight
     {
         private int id;
         private string title;
-        private int releaseDate;
+        private DateTime releaseDate;
         private string genre;
         private string description;
 
@@ -22,7 +22,7 @@ namespace MovieNight
             get { return title; }
             set { title = value; }
         }
-        public int ReleaseDate
+        public DateTime ReleaseDate
         {
             get { return releaseDate; }
             set { releaseDate = value; }
@@ -37,7 +37,7 @@ namespace MovieNight
             get { return description; }
             set { description = value; }
         }
-        public Movie(int id, string title, int releaseDate, string genre, string description)
+        public Movie(int id, string title, DateTime releaseDate, string genre, string description)
         {
             this.MovieID = id;
             this.Title = title;
