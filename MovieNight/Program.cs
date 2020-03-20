@@ -19,7 +19,6 @@ namespace MovieNight
                     continue;
                 }
 
-
                 switch (input)
                 {
                     case 1:
@@ -83,23 +82,21 @@ namespace MovieNight
             {
                 Console.WriteLine(item.FirstName + " " + item.LastName + "\n");
             }
-
             Console.WriteLine("Tryk på ENTER for at fortsætte..");
             Console.ReadKey();
             Console.Clear();
         }
         public static void SearchByGenre()
         {
-            Console.Write("search for genre: ");
+            Console.Write("Søg efter genre: ");
             string genre = Console.ReadLine();
 
-            Console.WriteLine("\nMovies related to: " + genre);
+            Console.WriteLine("\nFilm med genren: " + genre);
             List<Movie> movieByGenre = MovieLibrary.GenreMovieList(genre);
             foreach (Movie item in movieByGenre)
             {
                 Console.WriteLine("\n" + item.Title);
             }
-
             Console.WriteLine("Tryk på ENTER for at fortsætte..");
             Console.ReadKey();
             Console.Clear();

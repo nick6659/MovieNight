@@ -52,7 +52,7 @@ namespace MovieNight
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    string firstName = (string)reader["Name"];
+                    string firstName = (string)reader["FirstName"];
                     string lastName = (string)reader["LastName"];
 
                     Actor a = new Actor(firstName, lastName);
@@ -66,7 +66,7 @@ namespace MovieNight
         {
             List<Movie> movies = new List<Movie>();
             using (SqlConnection connection = new SqlConnection(connectionString))
-            {
+            {   
                 connection.Open();
                 SqlCommand cmd = new SqlCommand("SELECT Title FROM Movie INNER JOIN MovieGenre ON[Movie].[ID] = [MovieGenre].[MovieID] INNER JOIN Genre ON[Genre].[ID] = [MovieGenre].[GenreID] WHERE Type LIKE @search", connection);
                 SqlParameter parameter = new SqlParameter();
@@ -76,10 +76,9 @@ namespace MovieNight
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    string title = (string)reader["Title"];
+                    string title = (string)reader["Titel"];
 
                     Movie m = new Movie(title);
-
                     movies.Add(m);
                 }
             }
