@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace MovieNight
 {
@@ -7,10 +8,11 @@ namespace MovieNight
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = Encoding.UTF8;
             while (true)
             {
                 Console.WriteLine("MovieNight\n");
-                Console.Write("1) Søg efter film \n2) Søg efter skuespiller \n3) Søg på genre \n4) Exit \n\nDu har valgt: ");
+                Console.Write("1) Søg efter film \n2) Søg efter skuespiller \n3) Søg på genre \n4) Luk \n\nDu har valgt: ");
                 if (!int.TryParse(Console.ReadLine(), out int input))
                 {
                     Console.WriteLine("Prøv venligst igen!");
