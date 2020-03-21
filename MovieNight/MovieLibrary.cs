@@ -15,5 +15,6 @@ namespace MovieNight
         {
             return Dal.GetMoviesByGenre(search);
         }
+   
     }
 }

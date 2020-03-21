@@ -76,13 +76,47 @@ namespace MovieNight
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
+                    int id = (int)reader["ID"];
                     string title = (string)reader["Titel"];
 
-                    Movie m = new Movie(title);
+                    Movie m = new Movie(id, title);
                     movies.Add(m);
                 }
             }
             return movies;
+        }
+        public static Movie InsertMovie(Movie m)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand("INSERT INTO Movie(Title, Release_date, Genre, Description) OUTPUT INSERTED.ID VALUES(@t, @g, @d, @l, @r)", connection);
+
+                cmd.Parameters.Add(new SqlParameter("@t", m.Title));
+                cmd.Parameters.Add(new SqlParameter("@g", m.ReleaseDate));
+                cmd.Parameters.Add(new SqlParameter("@d", m.Genre));
+                cmd.Parameters.Add(new SqlParameter("@l", m.Description));
+
+                int newId = (Int32)cmd.ExecuteScalar();
+                m.MovieID = newId;
+            }
+            return m;
+        }
+        public static Movie EditMovie(Movie m)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE Movie SET Title = @t, Genre = @g, Description = @d, Length = @l, Release_date = @r WHERE ID = @ID", connection);
+
+                cmd.Parameters.Add(new SqlParameter("@ID", m.MovieID));
+                cmd.Parameters.Add(new SqlParameter("@t", m.Title));
+                cmd.Parameters.Add(new SqlParameter("@g", m.ReleaseDate));
+                cmd.Parameters.Add(new SqlParameter("@d", m.Genre));
+                cmd.Parameters.Add(new SqlParameter("@l", m.Description));
+                cmd.ExecuteNonQuery();
+            }
+            return m;
         }
     }
 }

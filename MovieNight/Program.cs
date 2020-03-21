@@ -9,11 +9,12 @@ namespace MovieNight
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
+
             while (true)
             {
                 Console.WriteLine("MovieNight\n");
-                Console.Write("1) Søg efter film \n2) Søg efter skuespiller \n3) Søg på genre \n4) Luk \n\nDu har valgt: ");
-                if (!int.TryParse(Console.ReadLine(), out int input))
+                Console.Write("1) Søg efter film \n2) Søg efter skuespiller \n3) Søg på genre \n4) FilmMenu \n5) SkuespillerMenu \n6) Luk \n\nDu har valgt: ");
+                if (!int.TryParse(Console.ReadLine(), out int input1))
                 {
                     Console.WriteLine("Prøv venligst igen!");
                     Console.ReadKey();
@@ -21,7 +22,7 @@ namespace MovieNight
                     continue;
                 }
 
-                switch (input)
+                switch (input1)
                 {
                     case 1:
                         Console.Clear();
@@ -35,15 +36,54 @@ namespace MovieNight
 
                     case 3:
                         Console.Clear();
-                        SearchByGenre();
+                        SearchGenre();
+                        break;
+                    case 4:
+                        Console.Clear();
+                        Console.Write("1) Tilføj film \n2) Rediger film \n3) Slet film \n6) Luk \n\nDu har valgt: ");
+                        Console.ReadLine();
+                        if (!int.TryParse(Console.ReadLine(), out int input2))
+                        {
+                            Console.WriteLine("Prøv venligst igen!");
+                            Console.ReadKey();
+                            Console.Clear();
+                            continue;
+                        }
+                        switch (input2)
+                        {
+                            case 1:
+
+                                Console.Clear();
+                                Console.Write("Titel på filmen: ");
+                                string title = Console.ReadLine();
+                                Console.Write("Udgivelsesdato mm/dd/yyyy: ");
+                                DateTime releaseDate = DateTime.Parse(Console.ReadLine());
+                                Console.Write("Genre: ");
+                                string genre = Console.ReadLine();
+                                Console.Write("Beskrivelse: ");
+                                string description = Console.ReadLine();
+                                InsertMovie(title, releaseDate, genre, description);
+                                break;
+                            case 2:
+                                Console.Clear();
+                                break;
+                            case 3:
+                                Console.Clear();
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                    case 5:
+
                         break;
 
-                    case 4:
+                    case 6:
                         Environment.Exit(0);
                         break;
 
                     default:
-                        Console.WriteLine("\nPrøv venligst igen!");
+                        Console.WriteLine("\nPrøv venligst igen! 1");
                         Console.ReadKey();
                         Console.Clear();
                         break;
@@ -66,7 +106,6 @@ namespace MovieNight
             {
                 Console.WriteLine("Film titel: " + item.Title + "\nUdgivelsesår: " + item.ReleaseDate + "\nBeskrivelse: '" + item.Description + "'\n\n");
             }
-
             Console.WriteLine("Tryk på ENTER for at fortsætte..");
             Console.ReadKey();
             Console.Clear();
@@ -88,7 +127,7 @@ namespace MovieNight
             Console.ReadKey();
             Console.Clear();
         }
-        public static void SearchByGenre()
+        public static void SearchGenre()
         {
             Console.Write("Søg efter genre: ");
             string genre = Console.ReadLine();
@@ -102,6 +141,11 @@ namespace MovieNight
             Console.WriteLine("Tryk på ENTER for at fortsætte..");
             Console.ReadKey();
             Console.Clear();
+        }
+        public static Movie InsertMovie(string title, DateTime releaseDate, string genre, string description)
+        {
+            Movie m = new Movie(title, releaseDate, genre, description);
+            return Dal.InsertMovie(m);
         }
     }
 }

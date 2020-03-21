@@ -45,9 +45,17 @@ namespace MovieNight
             this.Genre = genre;
             this.Description = description;
         }
-        public Movie(string title)
+        public Movie(string title, DateTime releaseDate, string genre, string description)
         {
             this.Title = title;
+            this.ReleaseDate = releaseDate;
+            this.Genre = genre;
+            this.Description = description;
+        }
+        public Movie(int id, string title)
+        {
+            this.Title = title;
+            this.MovieID = id;
         }
     }
 }
