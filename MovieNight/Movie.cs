@@ -57,5 +57,10 @@ namespace MovieNight
             this.Title = title;
             this.MovieID = id;
         }
+        public Movie()
+        {
+
+
+        }
     }
 }

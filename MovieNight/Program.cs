@@ -14,7 +14,7 @@ namespace MovieNight
             {
                 Console.WriteLine("MovieNight\n");
                 Console.Write("1) Søg efter film \n2) Søg efter skuespiller \n3) Søg på genre \n4) Film Menu \n5) Skuespiller Menu \n6) Luk \n\nDu har valgt: ");
-                if (!int.TryParse(Console.ReadLine(), out int input1))
+                if (!int.TryParse(Console.ReadLine(), out int input))
                 {
                     Console.WriteLine("Prøv venligst igen!");
                     Console.ReadKey();
@@ -22,7 +22,7 @@ namespace MovieNight
                     continue;
                 }
 
-                switch (input1)
+                switch (input)
                 {
                     case 1:
                         Console.Clear();
@@ -42,26 +42,18 @@ namespace MovieNight
                         Console.Clear();
                         Console.Write("1) Tilføj film \n2) Rediger film \n3) Slet film \n6) Luk \n\nDu har valgt: ");
                         Console.ReadLine();
-                        if (!int.TryParse(Console.ReadLine(), out input1))
+                        if (!int.TryParse(Console.ReadLine(), out input))
                         {
                             Console.WriteLine("Prøv venligst igen!");
                             Console.ReadKey();
                             Console.Clear();
                             continue;
                         }
-                        switch (input1)
+                        switch (input)
                         {
                             case 1:
                                 Console.Clear();
-                                Console.Write("Titel på filmen: ");
-                                string title = Console.ReadLine();
-                                Console.Write("Udgivelsesdato mm/dd/yyyy: ");
-                                DateTime releaseDate = DateTime.Parse(Console.ReadLine());
-                                Console.Write("Genre: ");
-                                string genre = Console.ReadLine();
-                                Console.Write("Beskrivelse: ");
-                                string description = Console.ReadLine();
-                                InsertMovie(title, releaseDate, genre, description);
+                                InsertMovie();
                                 break;
                             case 2:
                                 Console.Clear();
@@ -82,7 +74,7 @@ namespace MovieNight
                         break;
 
                     default:
-                        Console.WriteLine("\nPrøv venligst igen! 1");
+                        Console.WriteLine("\nPrøv venligst igen!");
                         Console.ReadKey();
                         Console.Clear();
                         break;
@@ -96,10 +88,7 @@ namespace MovieNight
             Console.Write("Søg efter film: ");
             string searchMov = Console.ReadLine();
 
-
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\nFilm");
-            Console.ResetColor();
+            Console.WriteLine("\nFundne film:");
             List<Movie> movie = MovieLibrary.MovieList(searchMov);
             foreach (Movie item in movie)
             {
@@ -141,8 +130,16 @@ namespace MovieNight
             Console.ReadKey();
             Console.Clear();
         }
-        public static Movie InsertMovie(string title, DateTime releaseDate, string genre, string description)
+        public static Movie InsertMovie()
         {
+            Console.Write("Titel på filmen: ");
+            string title = Console.ReadLine();
+            Console.Write("Udgivelsesdato mm/dd/yyyy: ");
+            DateTime releaseDate = DateTime.Parse(Console.ReadLine());
+            Console.Write("Genre: ");
+            string genre = Console.ReadLine();
+            Console.Write("Beskrivelse: ");
+            string description = Console.ReadLine();
             Movie m = new Movie(title, releaseDate, genre, description);
             return Dal.InsertMovie(m);
         }

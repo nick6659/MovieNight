@@ -118,5 +118,31 @@ namespace MovieNight
             }
             return m;
         }
+        public static List<Movie> DeleteMovie(string search)
+        {
+            List<Movie> movies = new List<Movie>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand("DELETE FROM Movies WHERE movieTitle LIKE @search", connection);
+                SqlParameter sp = new SqlParameter();
+                sp.ParameterName = "@search";
+                sp.Value = "%" + search + "%";
+                cmd.Parameters.Add(sp);
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    int movieID = (int)rdr["movieID"];
+                    string movieTitle = (string)rdr["Title"];
+                    string description = (string)rdr["Description"];
+                    Movie movie = new Movie();
+                    movie.MovieID = movieID;
+                    movie.Title = movieTitle;
+                    movie.Description = description;
+                    movies.Add(movie);
+                }
+            }
+            return movies;
+        }
     }
 }
