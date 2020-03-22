@@ -13,7 +13,7 @@ namespace MovieNight
             while (true)
             {
                 Console.WriteLine("MovieNight\n");
-                Console.Write("1) Søg efter film \n2) Søg efter skuespiller \n3) Søg på genre \n4) FilmMenu \n5) SkuespillerMenu \n6) Luk \n\nDu har valgt: ");
+                Console.Write("1) Søg efter film \n2) Søg efter skuespiller \n3) Søg på genre \n4) Film Menu \n5) Skuespiller Menu \n6) Luk \n\nDu har valgt: ");
                 if (!int.TryParse(Console.ReadLine(), out int input1))
                 {
                     Console.WriteLine("Prøv venligst igen!");
@@ -42,17 +42,16 @@ namespace MovieNight
                         Console.Clear();
                         Console.Write("1) Tilføj film \n2) Rediger film \n3) Slet film \n6) Luk \n\nDu har valgt: ");
                         Console.ReadLine();
-                        if (!int.TryParse(Console.ReadLine(), out int input2))
+                        if (!int.TryParse(Console.ReadLine(), out input1))
                         {
                             Console.WriteLine("Prøv venligst igen!");
                             Console.ReadKey();
                             Console.Clear();
                             continue;
                         }
-                        switch (input2)
+                        switch (input1)
                         {
                             case 1:
-
                                 Console.Clear();
                                 Console.Write("Titel på filmen: ");
                                 string title = Console.ReadLine();
